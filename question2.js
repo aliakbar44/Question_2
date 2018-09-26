@@ -3,16 +3,18 @@
 const fs = require('fs');
 
 let student ;
-module.exports.fileName ='stadfasudent.json';
+module.exports.fileName ='student.json';
 module.exports.nodeValueToChange = 'Ali Akbar';
 module.exports.newJsonFileName = 'modifiedStudent.json';
 module.exports.result = '';
 
 exports.modifyXMLData = function(callback) {
     fs.readFile(module.exports.fileName, (err, data) => {  
-        if (err)  
-            module.exports.result = 'false';
-            callback(false); 
+        if (err) {
+        throw (err);
+        module.exports.result = 'false';
+        callback(err); return ;
+      }
         student = JSON.parse(data);
         student.name = module.exports.nodeValueToChange ;
         console.log('reading file '+module.exports.fileName);  
